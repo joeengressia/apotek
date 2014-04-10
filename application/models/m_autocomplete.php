@@ -241,7 +241,7 @@ class M_autocomplete extends CI_Controller {
         left join golongan g on (b.id_golongan = g.id)
         left join satuan st on (b.satuan_kekuatan = st.id)
         left join sediaan sd on (b.id_sediaan = sd.id) where b.barcode = '$barcode' and default_kemasan = '1'");
-        return $this->db->query($sql);
+        return $sql;
     }
     
     function get_expiry_barang($id_barang) {

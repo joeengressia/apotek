@@ -503,9 +503,21 @@ function form_add_penjualan_non_resep() {
                     success: function(data) {
                         $('#barang').val(data.nama_barang);
                         $('#id_barang').val(data.id);
-                        if (data.id !== '') {
-                            add_new_rows(data.id, data.nama, '1', data.id_packing);
+                       // console.log(data.id);
+                        
+                        if(data.nama==undefined)
+                        {
+                            alert('barcode tidak ditemukan');
+                             $('#barcode').focus();
+                            return false;
                         }
+                        //console.log(data);
+
+                        if (data.id !== '') {
+                           // add_new_rows(data.id, data.nama, '1', data.id_packing);
+                           add_new_rows(data, '1');
+                        }
+
                         $('#id_barang').val('');
                         $('#barang').val('');
                         $('#barcode').val('').focus();
