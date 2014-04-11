@@ -6,6 +6,7 @@ class M_autocomplete extends CI_Controller {
         $tanggal = date2mysql($_GET['tanggal']);
         $yearmon = substr($tanggal, 0, 7);
         $monyear = substr($_GET['tanggal'], 3, 7);
+       
         $sql = $this->db->query("select substr(id, 4,3) as id  from pemesanan where tanggal like ('%".$yearmon."%') order by tanggal desc limit 1");
         
         $row = $sql->row();
