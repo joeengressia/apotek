@@ -74,12 +74,14 @@
                     . "#" . $rows->darah_gol
                     . "#" . $rows->lahir_tanggal
                     . "#" . $rows->id_dp;
+            
+            $alamat=get_one('alamat','dinamis_penduduk','penduduk_id='.$rows->penduduk_id.' ORDER BY id DESC');
             ?>
             <tr class="tr_row <?= ($key % 2 == 1) ? 'even' : 'odd' ?>" ondblclick="edit_penduduk('<?= $str ?>')">
                 <td align="center"><?= (++$key + (($page - 1) * $limit)) ?></td>
                 <td align="center"><?= ($rows->no_rm =='')?'-':$rows->no_rm ?></td>
                 <td><?= $rows->nama ?></td>
-                <td><?= !empty($rows->alamat) ? $rows->alamat : '-' ?></td>
+                <td><?= !empty($alamat) ? $alamat : '-' ?></td>
                 <td><?= $rows->telp ?></td>
                 <td align="center">
                     <a title="Edit penduduk" class="edition" onclick="edit_penduduk('<?= $str ?>')"></a>

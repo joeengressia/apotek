@@ -1,5 +1,16 @@
 <?php
 
+function get_one($column,$table,$where=1)
+{
+    $ci=&get_instance();
+    $sql='SELECT '.$column.' FROM '.$table.' WHERE '.$where.' LIMIT 1';
+    $exec=$ci->db->query($sql);
+    $row=$exec->row_array();
+    $value=!empty($row)?$row[$column]:'';
+    //echo $sql;
+    return $value;
+}
+
 function pembulatan_seribu($angka) {
     $kelipatan = 1000;
     $sisa = $angka % $kelipatan;

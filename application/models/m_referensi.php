@@ -1168,6 +1168,15 @@ class M_referensi extends CI_Model {
         $limitation = null;
         $limitation.=" limit $start , $limit";
 
+//        $sql = "select p.*, d.*, d.id as id_dp, ps.no_rm, p.id as penduduk_id, kl.nama as kelurahan,kb.nama as kabupaten, pd.nama as pendidikan, pr.nama profesi 
+//            from penduduk p
+//        left join pasien ps on (p.id = ps.id)
+//        left join dinamis_penduduk d on (p.id = d.penduduk_id)
+//        left join kabupaten kb on (p.lahir_kabupaten_id = kb.id)
+//        left join kelurahan kl on (d.kelurahan_id = kl.id)
+//        left join pendidikan pd on (d.pendidikan_id = pd.id)
+//        left join profesi pr on (d.profesi_id = pr.id)
+//        where p.id is not null";
         $sql = "select p.*, d.*, d.id as id_dp, ps.no_rm, p.id as penduduk_id, kl.nama as kelurahan,kb.nama as kabupaten, pd.nama as pendidikan, pr.nama profesi 
             from penduduk p
         left join pasien ps on (p.id = ps.id)
@@ -1177,12 +1186,15 @@ class M_referensi extends CI_Model {
         left join pendidikan pd on (d.pendidikan_id = pd.id)
         left join profesi pr on (d.profesi_id = pr.id)
         where p.id is not null";
-        $order = ' order by p.nama asc';
+        $order = ' GROUP BY p.id order by p.nama asc';
         
-
+        
         $query = $this->db->query($sql . $q . $order . $limitation);
         //echo $sql . $q . $order . $limitation;
         $data['data'] = $query->result();
+        
+        
+        
         $data['jumlah'] = $this->db->query($sql . $q)->num_rows();
         return $data;
     }
